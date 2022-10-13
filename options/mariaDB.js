@@ -1,4 +1,4 @@
-const connection = {
+const options = {
     client: 'mysql',
     connection: {
         host: 'localhost',
@@ -8,4 +8,6 @@ const connection = {
     }
 }
 
-export default connection;
+module.exports= {
+    options
+}

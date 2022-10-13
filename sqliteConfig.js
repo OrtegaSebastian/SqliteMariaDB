@@ -1,6 +1,6 @@
 const sqliteConfig = {
     cliente: 'sqlite3',
     connection:{
-       filename:"./DB/productosDB.sqlite" 
+    filename:"./DB/productosDB.sqlite" 
     }
 }
