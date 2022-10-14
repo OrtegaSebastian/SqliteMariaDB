@@ -21,9 +21,9 @@ Knex.schema.createTable('productos',table=>{
 
     //Metodos a implementar en productos
     // module.exports = {
-    //     save,
-    //     getById,
-    //     getAll,
-    //     deleteById,
-    //     updateById
+    //     save, YES
+    //     getById, YES 
+    //     getAll,yes
+    //     deleteById,yes
+    //     updateById 
     // };

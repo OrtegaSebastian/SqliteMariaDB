@@ -5,4 +5,7 @@ Knex.from("productos")
 .where("id", 2)
 .del()
 .then(() => console.log("articulos eliminados!"))
-.catch((e) => console.log(e));
+.catch((e) => console.log(e))
+.finally(()=>{
+    Knex.destroy();
+})

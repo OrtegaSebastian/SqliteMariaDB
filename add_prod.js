@@ -11,5 +11,5 @@ Knex('productos').insert(productos)
     .then(()=> console.log("data inserted"))
     .catch((error)=>{console.log(error); throw error})
     .finally(()=>{
-        knex.destroy()
+        Knex.destroy()
     })
