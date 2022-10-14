@@ -1,4 +1,4 @@
-const {options}= require('./options/mariaDB.js')
+const {options}= require('../options/mariaDB')
 const Knex = require('knex')(options);
 
 Knex.from("productos")
