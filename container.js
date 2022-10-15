@@ -1,5 +1,7 @@
 import knex from "knex";
-class DBContainer {
+
+
+class productosDB {
     // * get, post, put, delete
     // * CRUD
     constructor(config, tabla) {
@@ -65,4 +67,4 @@ class DBContainer {
     }
 }
 
-export default DBContainer;
+export default productosDB;
