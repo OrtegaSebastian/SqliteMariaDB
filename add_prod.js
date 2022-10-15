@@ -1,5 +1,6 @@
-const {options}= require('../options/mariaDB.js')
-const Knex = require('knex')(options);
+import options from "./options/mariaDB.js"
+import knex from "knex";
+const Knex = knex(options)
 
 const productos = [
     {nombre:"Lata Salta Roja",descripcion:"Cerveza Roja",codigo:"LAT001",foto:"http://www.productos.com.ar/fotos/lataroja.jpg",precio:160,stock:1000,timestamp:1664534924249},
@@ -7,7 +8,7 @@ const productos = [
     {nombre:"Lata 3",descripcion:"Cerveza verde",codigo:"LAT003",foto:"http://www.productos.com.ar/fotos/lataroja.jpg",precio:360,stock:1000,timestamp:1664534924249}
 ]
 
-Knex('productos').insert(productos)
+Knex('Tproductos').insert(productos)
     .then(()=> console.log("data inserted"))
     .catch((error)=>{console.log(error); throw error})
     .finally(()=>{

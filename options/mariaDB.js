@@ -7,7 +7,4 @@ const options = {
         database:'productos',
     }
 }
-
-module.exports= {
-    options
-}
+export default  options

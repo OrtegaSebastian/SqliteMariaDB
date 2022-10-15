@@ -1,6 +1,8 @@
 const sqliteConfig = {
-    cliente: 'sqlite3',
-    connection:{
-    filename:"./DB/productosDB.sqlite" 
-    }
-}
+    client: "sqlite3",
+    connection: {
+    filename: "./DB/ecommerce.js",
+},
+useNullAsDefault: true,
+};
+export default sqliteConfig;

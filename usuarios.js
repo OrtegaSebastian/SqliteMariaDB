@@ -8,7 +8,9 @@ Knex.schema
     tabla.increments("id");
     tabla.string("nombre");
     tabla.string("apellido");
-    tabla.string("correo");s
+    tabla.string("correo");
+    tabla.string("chat");
+    tabla.date("fecha");    
     tabla.integer("rango");
 })
 .then(() => console.log("tabla creada!"))
@@ -19,6 +21,7 @@ throw e;
 .finally(() => {
 Knex.destroy();
 });
+
 
 // const socket = io()
 // // const moment = require('moment');
