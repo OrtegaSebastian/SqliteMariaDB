@@ -4,13 +4,11 @@ const Knex = knex(sqliteConfig);
 
 Knex.schema
 .createTable("chat", (tabla) => {
-    // ? id int auto_increment primary key
+
     tabla.increments("id");
-    tabla.string("nombre");
-    tabla.string("apellido");
+    tabla.date("fecha");
     tabla.string("correo");
-    tabla.string("chat");
-    tabla.date("fecha"); 
+    tabla.string("mensaje");     
 })
 .then(() => console.log("tabla creada!"))
 .catch((e) => {

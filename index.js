@@ -1,9 +1,14 @@
 
 import express from "express"
 import productosDB from "./contenedor.js";
+import handlebars from "express-handlebars";
 const app = express();
 import mariaDB from "./options/mariaDB.js";
+import sqliteConfig from "./sqliteConfig.js";
+sqliteConfig.connection.filename = "./DB/ecommerce.sqlite"
 const dataBaseProd = new productosDB(mariaDB, "productos");
+const dataBaseChat = new productosDB(sqliteConfig, "chat");
+
 app.use(express.json());
 app.set("json spaces", 2);
 
@@ -41,10 +46,12 @@ console.log("escuchando!");
 });
 
 //chat
-const handlebars = require('express-handlebars')
-const server = require('http').createServer(app)
-const port = process.env.PORT || 8080
-const io = require('socket.io')(server)
+
+import { Server } from 'socket.io';
+import { createServer } from 'http';
+const httpServer = createServer(app);
+const io = new Server(httpServer);
+
 
 app.use(express.json());
 app.use(express.static('views'))
@@ -66,10 +73,12 @@ app.set("view engine", "hbs");
 app.get("/chat", (req, res) => {
     res.render("main", {layout:"chat"});  
 });
-io.on('connection', socket => {
+io.on('connection', async (socket) => {
 socket.on('chat', message => {
     console.log('From client: ', message)
+    io.emit( 'productos', await dataBaseProd.getAll())
     io.emit('chat', message)
+
 })
 })  
 server.listen(port, () => {
