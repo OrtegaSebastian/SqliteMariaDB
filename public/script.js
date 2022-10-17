@@ -17,3 +17,17 @@ Input.value = ''
 Correo.value= ''
 
 })
+// Levanto el chat window y pongo el mensaje que me llega de los otros clientes.
+const chatWindow = document.querySelector('.chat-window')
+
+const renderMessage = message => {
+  const div = document.createElement('div')
+  div.classList.add('render-message')
+  div.innerText = message
+  chatWindow.appendChild(div)
+}
+
+// Escucho el chat y renderizo los mensajes que me llegan.
+socket.on('chat', message => {
+  renderMessage(message)
+})

@@ -24,7 +24,7 @@ sqliteConfig.connection.filename = "./DB/ecommerce.sqlite"
 const dataBaseProd = new DBContainer(mariaDB, "productos");
 const dataBaseChat = new DBContainer(sqliteConfig, "chat");
 
-console.log(path.join(__dirname, "/views"))
+console.log(path.join(__dirname, "/public"))
 
 app.use(express.json());
 app.use(express.static('views'))
