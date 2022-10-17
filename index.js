@@ -3,9 +3,18 @@ import express from "express"
 import handlebars from "express-handlebars";
 
 const app = express();
-const {pathname: chat} = new URL('./views', import.meta.url)
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
+//SOCKET 
+
+import { Server } from 'socket.io';
+import { createServer } from 'http';
+const httpServer = createServer(app);
+const io = new Server(httpServer);
 
 //DB
 import DBContainer from "./container.js";
@@ -20,11 +29,37 @@ app.use(express.json());
 app.use(express.static('views'))
 app.use(express.urlencoded({ extended: true }));
 
+// configuraciones
+app.set("views", __dirname, "/views");
+app.set("view engine", "hbs"); 
+app.set("json spaces", 2); 
+app.use("/", express.static(path.join(__dirname, "../views")))
+//hbs
+
+const hbs = handlebars.engine({
+    extname: '.hbs',
+    layoutsDir: __dirname + "./views",
+
+})
+app.engine("hbs", hbs);
 
 
+app.get("/chat", (req, res) => {
+    res.render("main", {layout:"chat"});  
+});
+const mensajes=[]
+io.on('connection', async (socket) => {
+socket.on('chat', async (data) =>{
+    await dataBaseChat.add(data)
+    mensajes.push(data);
+    console.log('From client: ', message)
+    io.emit( 'productos', await dataBaseProd.getAll())  
 
-app.use(express.json());
-app.set("json spaces", 2);
+})
+})  
+httpServer.listen(3300, () => {
+    console.log("Server ON");
+}); 
 
 app.get("/products", async (req, res) => {
     const menu = await DBContainer.getAll();
@@ -56,39 +91,4 @@ res.send({ result });
 });
 
 
-//SOCKET 
 
-import { Server } from 'socket.io';
-import { createServer } from 'http';
-const httpServer = createServer(app);
-const io = new Server(httpServer);
-
-//hbs
-
-const hbs = handlebars.engine({
-    extname: '.hbs',
-    layoutsDir: chat + "./views",
-
-})
-app.engine("hbs", hbs);
-
-// configuraciones
-app.set("views", chat ,"/views");
-app.set("view engine", "hbs");  
-
-app.get("/chat", (req, res) => {
-    res.render("main", {layout:"chat"});  
-});
-const mensajes=[]
-io.on('connection', async (socket) => {
-socket.on('chat', async (data) =>{
-    await dataBaseChat.add(data)
-    mensajes.push(data);
-    console.log('From client: ', message)
-    io.emit( 'productos', await dataBaseProd.getAll())  
-
-})
-})  
-httpServer.listen(3300, () => {
-    console.log("Server ON");
-}); 
