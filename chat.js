@@ -11,11 +11,7 @@ Knex.schema.createTable("chat",(table)=>{
 
 })
     .then(()=> console.log("table created"))
-    .catch((err)=>{console.log(err); throw err})
-    .finally(()=>{
-        Knex.destroy();
-    })
-
+    .catch((err)=>{console.log(err); throw err})  
 
 
 

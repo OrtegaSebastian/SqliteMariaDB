@@ -1,5 +1,6 @@
+
 const socket = io()
-// const moment = require('moment');
+
 const date = new Date()
 // Levanto los controles del form de chat y el input de mensajes que se envian.
 const chat = document.querySelector('.chat-form')

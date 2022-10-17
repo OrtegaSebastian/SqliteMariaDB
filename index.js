@@ -24,21 +24,22 @@ sqliteConfig.connection.filename = "./DB/ecommerce.sqlite"
 const dataBaseProd = new DBContainer(mariaDB, "productos");
 const dataBaseChat = new DBContainer(sqliteConfig, "chat");
 
+console.log(path.join(__dirname, "/views"))
 
 app.use(express.json());
 app.use(express.static('views'))
 app.use(express.urlencoded({ extended: true }));
 
 // configuraciones
-app.set("views", __dirname, "/views");
+app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "hbs"); 
 app.set("json spaces", 2); 
-app.use("/", express.static(path.join(__dirname, "../views")))
+app.use("/", express.static(path.join(__dirname, "/views")))
 //hbs
 
 const hbs = handlebars.engine({
     extname: '.hbs',
-    layoutsDir: __dirname + "./views",
+    layoutsDir: __dirname + "/views",
 
 })
 app.engine("hbs", hbs);
