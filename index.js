@@ -24,7 +24,6 @@ sqliteConfig.connection.filename = "./DB/ecommerce.sqlite"
 const dataBaseProd = new DBContainer(mariaDB, "productos");
 const dataBaseChat = new DBContainer(sqliteConfig, "chat");
 
-console.log(path.join(__dirname, "/public"))
 
 app.use(express.json());
 app.use(express.static('views'))
@@ -35,12 +34,13 @@ app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "hbs"); 
 app.set("json spaces", 2); 
 app.use("/", express.static(path.join(__dirname, "/views")))
+// app.use("/chat", express.static(path.join(__dirname, "/public")))
+
 //hbs
 
 const hbs = handlebars.engine({
     extname: '.hbs',
     layoutsDir: __dirname + "/views",
-
 })
 app.engine("hbs", hbs);
 
@@ -63,8 +63,8 @@ httpServer.listen(3300, () => {
 }); 
 
 app.get("/products", async (req, res) => {
-    const menu = await DBContainer.getAll();
-    res.send(menu);
+    const productos = await DBContainer.getAll();
+    res.send(productos);
 });
 app.get("/products/:id", async (req, res) => {
     const { id } = req.params;
